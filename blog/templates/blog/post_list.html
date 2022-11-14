@@ -5,3 +5,8 @@
 {% include 'blog/post.html' with post=post %}
 {% endfor %}
 {% endblock %}
+{% block footer %}
+<p class='text-muted'>
+  Количество посещений данной страницы: {{num_visits}}
+</p>
+{% endblock %}
