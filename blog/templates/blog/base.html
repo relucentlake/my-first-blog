@@ -30,6 +30,14 @@
                 <a class="nav-link" href="{%url 'post_new'%}"> <i class="bi-plus-lg"></i> Добавить пост</a>
               </li>
             </ul>
+              {% if user.get_username %}
+                <ul class="navbar-nav ms-auto">
+                  <span class="navbar-text">{{user.get_username}}</span>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{%url 'logout'%}">Выйти</a>
+                  </li>
+                </ul>
+              {% endif %} 
             {% else %}
             <ul class="navbar-nav ms-auto">
               <li class="nav-item">
@@ -37,14 +45,7 @@
               </li>
             </ul>
             {% endif %}
-          <ul class="navbar-nav ms-auto">
-            {% if user.get_username %} 
-                <span class="navbar-text">{{user.get_username}}</span>
-                <li class="nav-item">
-                  <a class="nav-link" href="{%url 'logout'%}">Выйти</a>
-                </li>
-            {% endif %} 
-          </ul>
+        
         </div>
       </div>
     </nav>
