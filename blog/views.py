@@ -47,7 +47,7 @@ def post_edit(request, pk):
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
-    if  Comment.objects is not None:
+    if  Comment.objects is not []:
         num_comments = Comment.objects.count()
     else:
         num_comments = 0
