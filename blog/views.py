@@ -13,7 +13,10 @@ from django.urls import reverse_lazy
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    comments = post.comment_set.all()
+    try:
+        comments = post.comment_set.all()
+    except:
+        comments = 0
     return render(request, 'blog/post_detail.html', {"post": post, "comments": comments})
 
 def post_new(request):
