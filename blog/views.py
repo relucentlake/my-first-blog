@@ -2,7 +2,7 @@ from django import forms
 from django.shortcuts import render
 from django.utils import timezone
 from .models import Post, Comment
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, get_list_or_404
 from .forms import PostForm, CommentForm
 from django.shortcuts import redirect
 from django.core.exceptions import PermissionDenied
@@ -47,14 +47,10 @@ def post_edit(request, pk):
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
-    try:
-        num_comments = Comment.objects.count()
-    except:
-        num_comments = 0
     num_visits = request.session.get('num_visits', 0)
     num_visits += 1
     request.session['num_visits'] = num_visits
-    return render(request, 'blog/post_list.html', {"num_visits": num_visits, "posts": posts, "num_comments": num_comments})
+    return render(request, 'blog/post_list.html', {"num_visits": num_visits, "posts": posts})
 
 
 def comment_new(request, pk):
@@ -92,7 +88,7 @@ def comment_edit(request, pk):
             return redirect('post_detail', pk=comment.post.pk)
     else:
         form = CommentForm(instance=comment)
-    return render(request, 'blog/comment_edit.html', {'form': form})
+    return render(request, 'blog/comment_edit.html', {'form': form, 'comment': comment})
 
 class CommentDelete(DeleteView):
     model = Comment
