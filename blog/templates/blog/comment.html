@@ -11,9 +11,13 @@
                 {{comment.author.username}}                
             </small>
         </p>
-        <a href="{% url 'comment_edit' pk=comment.pk %}">
+        <a href="{% url 'comment_edit' pk=comment.pk %}", class="card-link">
             <i class="bi-pencil-square"></i>
             Редактировать
+        </a>
+        <a href="{% url 'comment_delete' pk=comment.pk %}", class="card-link">
+            <i class="bi bi-trash"></i>
+            Удалить
         </a>
     </div>
 </div>

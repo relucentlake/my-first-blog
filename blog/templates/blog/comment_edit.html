@@ -1,14 +1,11 @@
 {% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 <h1>Новый комментарий</h1>
 <form method="POST">
   {% csrf_token %}
-  {{ form.as_p }}  
+  {% crispy form %} 
   <button type="submit" class="btn btn-primary">Сохранить</button>
-  <a href="{% url 'comment_delete' pk=comment.pk %}">
-    <i class="bi bi-delete"></i>
-    Удалить
-  </a>
 </form>
 {% endblock %}
